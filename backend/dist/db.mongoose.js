@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectToDatabase = connectToDatabase;
 exports.closeDatabaseConnection = closeDatabaseConnection;
 const mongoose_1 = __importDefault(require("mongoose"));
-const DB_STRING = process.env.DB_STRING;
-const uri = DB_STRING || "";
+const MONGODB_URI = process.env.MONGODB_URI;
+const uri = MONGODB_URI || "";
 async function connectToDatabase() {
     await mongoose_1.default.connect(uri);
 }
