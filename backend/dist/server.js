@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
+(0, db_mongoose_js_1.connectDB)();
 // Routes
 app.use('/', quizRoutes_js_1.default);
 app.get('/api', (req, res) => {
@@ -26,11 +27,4 @@ app.use((err, req, res, next) => {
 // Start the server
 app.listen(PORT, async () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-    try {
-        await (0, db_mongoose_js_1.connectToDatabase)();
-        console.log('Connected to MongoDB successfully!');
-    }
-    catch (err) {
-        console.error('Failed to connect to MongoDB:', err);
-    }
 });
