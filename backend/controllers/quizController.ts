@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import axios from 'axios';
 import Quiz from '../models/Quiz';
 
+
+
 export const generateQuiz = async (
   req: Request,
   res: Response,
@@ -14,7 +16,12 @@ export const generateQuiz = async (
       return;
     }
 
-    const response = await axios.post('http://localhost:5000/generate-quiz', { topic });
+    // Use different URL based on environment
+    const quizGenUrl = process.env.NODE_ENV === 'production'
+      ? 'https://quiz-gen-phi.vercel.app/generate-quiz'
+      : 'http://localhost:5000/generate-quiz';
+
+    const response = await axios.post(quizGenUrl, { topic });
     const { questions } = response.data;
 
     // Save quiz to MongoDB

@@ -14,9 +14,8 @@ __pycache__/
 .venv/
 
 # Build output
-backend/dist/
 frontend/dist/
-dist/
+
 
 # Logs
 *.log
