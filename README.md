@@ -14,8 +14,7 @@ A full-stack application for generating, taking, and grading topic-based quizzes
 
 ### 1. Clone the repository
 ```sh
-git clone <your-repo-url>
-cd topic-quiz-creator
+git clone https://github.com/DavidN22/QuizGen.git
 ```
 
 ### 2. Install dependencies
@@ -37,9 +36,9 @@ pip install -r requirements.txt
 
 ### 3. Environment Variables
 - **Backend**: Create a `.env` file in `backend/` with at least:
-  - `DB_STRING` — your MongoDB connection string
+  - `MONGODB_URI` — your MongoDB connection string
 - **AI Service**: Create a `.env` file in `ai-service/` with at least:
-  - `OPENAI_API_KEY` — your OpenAI API key
+  - `GEMINI_API_KEY` — your Gemini API key
 
 ### 4. Start all services
 From the project root:
@@ -57,9 +56,10 @@ uvicorn main:app --reload --host 0.0.0.0 --port 5000
 
 ## Deployment Instructions
 - **Frontend**: Build with `npm run build` in `frontend/` and deploy the `dist/` folder to your static host (e.g., Vercel, Netlify).
-- **Backend**: Build with `npm run build` in `backend/` and deploy the output (e.g., to Heroku, Render, or your server).
-- **AI Service**: Deploy the FastAPI app (e.g., to AWS Lambda, Azure Functions, or a VM with Uvicorn/Gunicorn).
+- **Backend**: Build with `npm run build` in `backend/` and deploy the output (e.g., to Heroku, Render, or Vercel).
+- **AI Service**: Deploy the FastAPI app (e.g., to AWS Lambda, Vercel, Azure Functions, or a VM with Uvicorn/Gunicorn).
 - **MongoDB**: Use a managed service (MongoDB Atlas) or self-hosted instance.
+- **This app was fully deployed on vercel and used vercel.json files for configuration**
 
 ---
 

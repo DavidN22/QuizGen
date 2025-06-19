@@ -34,9 +34,11 @@ class QuizQuestion(BaseModel):
     options: list[str]
     correctAnswer: str
 
+# This ensures that the AI will generate in json format following the schema
 class GeneratedQuiz(BaseModel):
     questions: list[QuizQuestion]
 
+# The python sdk lets us use any AI llm, explicitly state instructions, and define the output type
 quiz_generator_agent = Agent(
     name="Quiz Generator",
     instructions=(
@@ -50,6 +52,45 @@ quiz_generator_agent = Agent(
     ),
     output_type=GeneratedQuiz,
 )
+
+# example output the AI will follow based on the pydantic schema
+# {
+#   "questions": [
+#     {
+#       "id": 1,
+#       "text": "What is the capital of France?",
+#       "options": ["A. Paris", "B. London", "C. Berlin", "D. Madrid"],
+#       "correctAnswer": "A"
+#     },
+#     {
+#       "id": 2,
+#       "text": "What is the largest planet in our solar system?",
+#       "options": ["A. Earth", "B. Jupiter", "C. Saturn", "D. Mars"],
+#       "correctAnswer": "B"
+#     },
+#     {
+#       "id": 3,
+#       "text": "What is the chemical symbol for gold?",
+#       "options": ["A. Au", "B. Ag", "C. Pb", "D. Fe"],
+#       "correctAnswer": "A"
+#     },
+#     {
+#       "id": 4,
+#       "text": "What is the largest mammal in the world?",
+#       "options": ["A. Elephant", "B. Blue Whale", "C. Giraffe", "D. Great White Shark"],
+#       "correctAnswer": "B"
+#     },
+#     {
+#       "id": 5,
+#       "text": "What is the smallest country in the world?",
+#       "options": ["A. Vatican City", "B. Monaco", "C. Nauru", "D. Tuvalu"],
+#       "correctAnswer": "A"
+#     }
+#   ]
+# }
+
+
+
 @app.post("/generate-quiz")
 async def generate_quiz(request: Request):
     data = await request.json()
