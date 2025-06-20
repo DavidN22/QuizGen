@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { generateQuiz } from '../util/api';
 import { Brain, Sparkles, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 interface Question {
   id: number;
@@ -32,7 +33,14 @@ function QuizGenerator({ onQuizGenerated }: QuizGeneratorProps) {
       const data = await generateQuiz(topic);
       onQuizGenerated(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      if (axios.isAxiosError(err) && err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Unknown error');
+      }
+      console.log('Quiz generation error:', err);
     } finally {
       setLoading(false);
     }

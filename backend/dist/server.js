@@ -15,14 +15,14 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 (0, db_mongoose_js_1.connectDB)();
 // Routes
-app.use('/', quizRoutes_js_1.default);
-app.get('/api', (req, res) => {
-    res.json({ server: 'Hello, this is your Express server!' });
+app.use("/", quizRoutes_js_1.default);
+app.get("/api", (req, res) => {
+    res.json({ server: "Hello, this is your Express server!" });
 });
-//global error handler
 app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).json({ message: 'Something went wrong' });
+    const status = err.status || 500;
+    const messages = err.message || err.error || "An unexpected error occurred.";
+    res.status(status).json({ error: messages });
 });
 // Start the server
 app.listen(PORT, async () => {
