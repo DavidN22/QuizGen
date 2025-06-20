@@ -40,7 +40,6 @@ function QuizGenerator({ onQuizGenerated }: QuizGeneratorProps) {
       } else {
         setError('Unknown error');
       }
-      console.log('Quiz generation error:', err);
     } finally {
       setLoading(false);
     }

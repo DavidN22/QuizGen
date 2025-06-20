@@ -4,6 +4,13 @@ A full-stack application for generating, taking, and grading topic-based quizzes
 
 ---
 
+## Live Demo
+
+- [Main App](https://quiz-gen-app.vercel.app/)
+- [Quiz Page](https://quiz-gen-app.vercel.app/quiz)
+
+---
+
 ## Local Setup & Run Steps
 
 ### Prerequisites
